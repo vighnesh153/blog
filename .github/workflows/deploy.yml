@@ -4,7 +4,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Checking out code
+        uses: actions/checkout@v1
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -12,8 +14,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ap-south-1
 
+      - name: Install Dependencies
+        run: npm install
+
       - name: Build static site
-        run: npm install && npm run-script build
+        run: npm run-script build
 
       - name: Deploy static site to S3 bucket
-        run: aws s3 sync ./public/ s3://blog-vighnesh153 --delete
+        run: aws s3 cp --recursive public/ s3://blog-vighnesh153 --cache-control 'public, max-age=300, s-maxage=31536000'
+
+      - name: Cloudfront invalidate
+        run: aws cloudfront create-invalidation --paths '/*' --distribution-id E1QD0AN1LK04E4
