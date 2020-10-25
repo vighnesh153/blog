@@ -1,7 +1,12 @@
-name: Deploy
-on: [push]
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - master
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checking out code
