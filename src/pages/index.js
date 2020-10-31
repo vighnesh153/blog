@@ -5,7 +5,6 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 
 import Post from "../components/post";
-import constants from "../constants";
 
 const IndexPage = () => (
   <Layout>
@@ -24,6 +23,7 @@ const IndexPage = () => (
                   date={node.frontmatter.date}
                   title={node.frontmatter.title}
                   path={node.frontmatter.path}
+                  tags={node.frontmatter.tags}
                   fluid={node.frontmatter.image?.childImageSharp?.fluid}
                 />
               ))}
@@ -49,6 +49,7 @@ const indexQuery = graphql`
             title
             date(formatString: "MMM Do YYYY @ H:M")
             path
+            tags
             image {
               childImageSharp {
                 fluid(maxWidth: 800) {

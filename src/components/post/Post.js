@@ -5,8 +5,9 @@ import GatsbyImage from "gatsby-image";
 
 import classes from "./Post.module.scss";
 import constants from "../../constants";
+import { slugify } from "../../utils";
 
-function Post({ title, path, date, fluid }) {
+function Post({ title, path, date, fluid, tags }) {
   path = "/posts" + path;
   return (
     <div className={classes.post} style={styles.post}>
@@ -27,6 +28,16 @@ function Post({ title, path, date, fluid }) {
             <Link to={path}>Read</Link>
           </div>
         </div>
+        <ul className={classes.postTags}>
+          {tags.map(tag => (
+            <li key={tag}>
+              <Link to={`/tags/${slugify(tag)}`} style={{
+                color: constants.theme.primary,
+                backgroundColor: constants.theme.secondary,
+              }}>{tag}</Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

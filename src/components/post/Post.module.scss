@@ -9,6 +9,13 @@
   padding: 20px
 }
 
+.post-image {
+  img {
+    width: 100%;
+    display: block;
+  }
+}
+
 .post-header {
   display: flex;
   align-items: center;
@@ -57,9 +64,24 @@
   }
 }
 
-.post-image {
-  img {
-    width: 100%;
-    display: block;
+.post-tags {
+  margin-top: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 5px;
+
+  li {
+    list-style: none;
+  }
+
+  a {
+    padding: 3px 8px;
+
+    font-size: 12px;
+
+    border-radius: 8px;
+    text-decoration: none;
   }
 }
