@@ -1,0 +1,23 @@
+.header {
+  margin-bottom: 1.45rem;
+}
+
+.header-container {
+  margin: 0 auto;
+  //padding: 1.45rem 1.0875rem;
+  padding: 1.45rem 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-title {
+  @media all and (max-width: 600px) {
+    font-size: 20px;
+  }
+}
+
+.header-extra-nav-links a {
+  margin-left: 20px;
+}
