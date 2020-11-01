@@ -5,6 +5,17 @@
   box-sizing: border-box;
 }
 
+html, body {
+  min-height: 100%;
+  position: relative;
+}
+
 body {
   background-color: #eee;
+}
+
+#___gatsby,
+#gatsby-focus-wrapper {
+  height: 100%;
+  position: relative;
 }

@@ -1,0 +1,31 @@
+.card {
+  position: relative;
+  margin-bottom: 20px;
+
+  background-color: white;
+}
+
+.card-body {
+  width: 80%;
+  padding: 10px 0;
+  margin: 0 auto;
+}
+
+.card-title {
+  margin: 10px 0;
+
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.card-image {
+  position: relative;
+
+  img {
+    width: 100%;
+  }
+}
+
+.post-card {
+  border: 1px solid #ddd;
+}

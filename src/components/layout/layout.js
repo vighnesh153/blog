@@ -13,6 +13,7 @@ import './layout.scss';
 
 import Header from "../header";
 import constants from "../../constants";
+import Footer from "../footer";
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -26,7 +27,7 @@ const Layout = ({ children }) => {
   `);
 
   return (
-    <>
+    <div style={{ height: '100%' }}>
       <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
       <div
         style={{
@@ -38,19 +39,9 @@ const Layout = ({ children }) => {
         }}
       >
         <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
-          © {new Date().getFullYear()}, Built by
-          {` `}
-          <a href="https://vighnesh153.com" target="_blank" rel="noreferrer">
-            Vighnesh Raut
-          </a>
-        </footer>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 };
 

@@ -1,0 +1,15 @@
+.left-main {
+  width: 64%;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
+}
+
+.sidebar {
+  width: 33%;
+
+  @media (max-width: 600px) {
+    display: none;
+  }
+}

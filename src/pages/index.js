@@ -5,6 +5,9 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 
 import Post from "../components/post";
+import Sidebar from "../components/sidebar";
+
+import classes from '../page-styles/index.module.scss';
 
 const IndexPage = () => (
   <Layout>
@@ -14,9 +17,9 @@ const IndexPage = () => (
         query={indexQuery}
         render={({ allMarkdownRemark: { edges } }) => {
           // `edges` will be an array of markdown posts
-          console.log(edges);
+          // console.log(edges);
           return (
-            <div style={styles.leftSideBar}>
+            <div style={styles.leftSideBar} className={classes.leftMain}>
               {edges.map(({ node }) => (
                 <Post
                   key={node.id}
@@ -31,8 +34,8 @@ const IndexPage = () => (
           );
         }}
       />
-      <div style={styles.rightSideBar}>
-        Advertisements and all the good stuff.
+      <div style={styles.rightSideBar} className={classes.sidebar}>
+        <Sidebar showRecentPosts={false} />
       </div>
     </div>
   </Layout>
@@ -74,11 +77,7 @@ const styles = {
     justifyContent: 'space-between',
   },
   leftSideBar: {
-    width: '64%',
   },
   rightSideBar: {
-    width: '33%',
-    height: '400px',
-    backgroundColor: 'white',
   },
 };
