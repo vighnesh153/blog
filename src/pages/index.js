@@ -5,39 +5,29 @@ import Layout from "../components/layout";
 import SEO from "../components/seo";
 
 import Post from "../components/post";
-import Sidebar from "../components/sidebar";
-
-import classes from '../page-styles/index.module.scss';
 
 const IndexPage = () => (
-  <Layout>
+  <Layout pageHeading="Homepage" displayWhiteBackground={false} displayRecentPostsInSidebar={false}>
     <SEO title="Home" />
-    <div style={styles.root}>
-      <StaticQuery
-        query={indexQuery}
-        render={({ allMarkdownRemark: { edges } }) => {
-          // `edges` will be an array of markdown posts
-          // console.log(edges);
-          return (
-            <div style={styles.leftSideBar} className={classes.leftMain}>
-              {edges.map(({ node }) => (
-                <Post
-                  key={node.id}
-                  date={node.frontmatter.date}
-                  title={node.frontmatter.title}
-                  slug={node.fields.slug}
-                  tags={node.frontmatter.tags}
-                  fluid={node.frontmatter.image?.childImageSharp?.fluid}
-                />
-              ))}
-            </div>
-          );
-        }}
-      />
-      <div style={styles.rightSideBar} className={classes.sidebar}>
-        <Sidebar showRecentPosts={false} />
-      </div>
-    </div>
+    <StaticQuery
+      query={indexQuery}
+      render={({ allMarkdownRemark: { edges } }) => {
+        // `edges` will be an array of markdown posts
+        // console.log(edges);
+        return (
+          edges.map(({ node }) => (
+            <Post
+              key={node.id}
+              date={node.frontmatter.date}
+              title={node.frontmatter.title}
+              slug={node.fields.slug}
+              tags={node.frontmatter.tags}
+              fluid={node.frontmatter.image?.childImageSharp?.fluid}
+            />
+          ))
+        );
+      }}
+    />
   </Layout>
 );
 
@@ -69,16 +59,3 @@ const indexQuery = graphql`
     }
   }
 `;
-
-const styles = {
-  root: {
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-  },
-  leftSideBar: {
-  },
-  rightSideBar: {
-  },
-};

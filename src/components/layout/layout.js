@@ -9,36 +9,48 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 
-import './layout.scss';
+import "./layout.scss";
+
+import classes from "../../page-styles/index.module.scss";
 
 import Header from "../header";
-import constants from "../../constants";
 import Footer from "../footer";
+import Sidebar from "../sidebar";
 
-const Layout = ({ children }) => {
+import constants from "../../constants";
+
+const Layout = ({ children, pageHeading, displayWhiteBackground, displayRecentPostsInSidebar }) => {
   const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
+      query SiteTitleQuery {
+          site {
+              siteMetadata {
+                  title
+              }
+          }
       }
-    }
   `);
 
   return (
-    <div style={{ height: '100%' }}>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+    <div style={{ height: "100%" }}>
+      <Header siteTitle={data["site"].siteMetadata?.title || `Title`} />
       <div
         style={{
           margin: `0 auto`,
           width: constants.bounds.rootContainer.width,
           maxWidth: constants.bounds.rootContainer.maxWidth,
           // padding: `0 1.0875rem 1.45rem`,
-          padding: `0 0 1.45rem`,
+          padding: `0 0 1.45rem`
         }}
       >
-        <main>{children}</main>
+        <h1 style={styles.siteHeading}>{pageHeading}</h1>
+        <div style={styles.root}>
+          <div style={styles.leftSideBar(displayWhiteBackground)} className={classes.leftMain}>
+            <main>{children}</main>
+          </div>
+          <div style={styles.rightSideBar} className={classes.sidebar}>
+            <Sidebar showRecentPosts={displayRecentPostsInSidebar} />
+          </div>
+        </div>
       </div>
       <Footer />
     </div>
@@ -46,7 +58,26 @@ const Layout = ({ children }) => {
 };
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 export default Layout;
+
+const styles = {
+  root: {
+    position: "relative",
+    display: "flex",
+    alignItems: "flex-start",
+    justifyContent: "space-between"
+  },
+  siteHeading: {
+    margin: "10px 0",
+    padding: "10px",
+    textAlign: "center",
+    backgroundColor: "white"
+  },
+  leftSideBar: (displayWhiteBackground) => ({
+    backgroundColor: displayWhiteBackground ? "white" : "transparent"
+  }),
+  rightSideBar: {}
+};
