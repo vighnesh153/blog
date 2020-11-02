@@ -7,8 +7,8 @@ import classes from "./Post.module.scss";
 import constants from "../../constants";
 import { slugify } from "../../utils";
 
-function Post({ title, path, date, fluid, tags }) {
-  path = "/posts" + path;
+function Post({ title, slug, date, fluid, tags }) {
+  const path = "/posts/" + slug;
   return (
     <div className={classes.post} style={styles.post}>
       <div className={classes.postImage}>

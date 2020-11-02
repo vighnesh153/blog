@@ -31,7 +31,7 @@ const Sidebar = ({ showRecentPosts }) => (
             <div className={[classes.card, classes.postCard].join(" ")} key={node.id}>
               <GatsbyImage fluid={node.frontmatter.image.childImageSharp.fluid} />
               <div className={classes.cardTitle}>
-                <Link to={"/posts" + node.frontmatter.path}>{node.frontmatter.title}</Link>
+                <Link to={"/posts/" + node.fields.slug}>{node.frontmatter.title}</Link>
               </div>
             </div>
           ))
@@ -52,7 +52,6 @@ const sidebarRecentPosts = graphql`
                     id
                     frontmatter {
                         title
-                        path
                         image {
                             childImageSharp {
                                 fluid(maxWidth: 800) {
@@ -60,6 +59,9 @@ const sidebarRecentPosts = graphql`
                                 }
                             }
                         }
+                    }
+                    fields {
+                        slug
                     }
                 }
             }
