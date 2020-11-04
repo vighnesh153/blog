@@ -24,7 +24,12 @@ exports.onCreateNode = ({ node, actions }) => {
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
-  const singlePostTemplate = path.resolve("./src/templates/single-post.js");
+
+  const templates = {
+    singlePost: path.resolve("./src/templates/single-post.js"),
+    tagsPage: path.resolve("./src/templates/tags-page.js"),
+    tagPosts: path.resolve("./src/templates/tag-posts.js"),
+  };
 
   return graphql(`
       {
@@ -53,7 +58,7 @@ exports.createPages = ({ actions, graphql }) => {
 
       createPage({
         path: "/posts/" + node.fields.slug,
-        component: singlePostTemplate,
+        component: templates.singlePost,
         context: {
           // passing slug as template props
           slug: node.fields.slug
@@ -61,5 +66,44 @@ exports.createPages = ({ actions, graphql }) => {
       });
     });
 
+    // All tags
+    const tags = [];
+    posts.forEach(edge => {
+      try {
+        edge.node.frontmatter.tags.forEach(tag => tags.push(tag));
+      } catch (e) {
+        console.log("************");
+        console.log("No tags for " + JSON.stringify(edge));
+        console.log("************");
+      }
+    });
+
+    // Counter of tags
+    const tagsPostCount = {};
+    tags.forEach(tag => {
+      tagsPostCount[tag] = (tagsPostCount[tag] || 0) + 1;
+    });
+
+    const uniqueTags = Array.from(new Set(tags));
+
+    createPage({
+      path: "/tags",
+      component: templates.tagsPage,
+      context: {
+        tags: uniqueTags,
+        tagsPostCount,
+      },
+    });
+
+    // create pages for each tags
+    uniqueTags.forEach(tag => {
+      createPage({
+        path: "/tags/" + slugify(tag),
+        component: templates.tagPosts,
+        context: {
+          tag,
+        },
+      });
+    });
   });
 };
