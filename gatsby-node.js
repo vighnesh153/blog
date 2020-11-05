@@ -3,6 +3,7 @@
  *
  * See: https://www.gatsbyjs.com/docs/node-apis/
  */
+const constants = require("./src/constants");
 
 const path = require("path");
 const { slugify } = require("./src/utils");
@@ -29,6 +30,7 @@ exports.createPages = ({ actions, graphql }) => {
     singlePost: path.resolve("./src/templates/single-post.js"),
     tagsPage: path.resolve("./src/templates/tags-page.js"),
     tagPosts: path.resolve("./src/templates/tag-posts.js"),
+    postList: path.resolve("./src/templates/post-list.js"),
   };
 
   return graphql(`
@@ -52,10 +54,7 @@ exports.createPages = ({ actions, graphql }) => {
     }
 
     const posts = result.data["allMarkdownRemark"].edges;
-
     posts.forEach(({ node }) => {
-      console.log(`Create page for: ` + "/posts/" + node.fields.slug)
-
       createPage({
         path: "/posts/" + node.fields.slug,
         component: templates.singlePost,
@@ -77,6 +76,7 @@ exports.createPages = ({ actions, graphql }) => {
         console.log("************");
       }
     });
+    const uniqueTags = Array.from(new Set(tags));
 
     // Counter of tags
     const tagsPostCount = {};
@@ -84,8 +84,7 @@ exports.createPages = ({ actions, graphql }) => {
       tagsPostCount[tag] = (tagsPostCount[tag] || 0) + 1;
     });
 
-    const uniqueTags = Array.from(new Set(tags));
-
+    // Create /tags page
     createPage({
       path: "/tags",
       component: templates.tagsPage,
@@ -95,7 +94,7 @@ exports.createPages = ({ actions, graphql }) => {
       },
     });
 
-    // create pages for each tags
+    // create page for each tag
     uniqueTags.forEach(tag => {
       createPage({
         path: "/tags/" + slugify(tag),
@@ -105,5 +104,25 @@ exports.createPages = ({ actions, graphql }) => {
         },
       });
     });
+
+    const postsPerPage = constants.postsPerPage;
+    const numberOfPages = Math.ceil(posts.length / postsPerPage);
+
+    for (let currentPage = 1; currentPage <= numberOfPages; currentPage++) {
+      createPage({
+        path: "/" + currentPage,
+        component: templates.postList,
+        context: {
+          limit: postsPerPage,
+          skip: (currentPage - 1) * postsPerPage,
+          currentPage,
+          numberOfPages
+        },
+      });
+    }
+
+
+
+
   });
 };

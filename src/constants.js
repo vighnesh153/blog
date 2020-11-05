@@ -13,7 +13,10 @@ const constants = {
       maxWidth: '960px',
       width: '80%',
     }
-  }
+  },
+
+  // If updated, also update the value of limit in graphql query in pages/index
+  postsPerPage: 1,
 };
 
-export default constants;
+module.exports = constants;

@@ -1,41 +1,53 @@
-import React from "react";
+import React  from "react";
 import { graphql, StaticQuery } from "gatsby";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-
+import Pagination from "../components/pagination";
 import Post from "../components/post";
 
-const IndexPage = () => (
-  <Layout pageHeading="Homepage" displayWhiteBackground={false} displayRecentPostsInSidebar={false}>
-    <SEO title="Home" />
-    <StaticQuery
-      query={indexQuery}
-      render={({ allMarkdownRemark: { edges } }) => {
-        // `edges` will be an array of markdown posts
-        // console.log(edges);
-        return (
-          edges.map(({ node }) => (
-            <Post
-              key={node.id}
-              date={node.frontmatter.date}
-              title={node.frontmatter.title}
-              slug={node.fields.slug}
-              tags={node.frontmatter.tags}
-              fluid={node.frontmatter.image?.childImageSharp?.fluid}
-            />
-          ))
-        );
-      }}
-    />
-  </Layout>
-);
+import constants from "../constants";
+
+const IndexPage = () => {
+  const { postsPerPage } = constants;
+
+  return (
+    <Layout pageHeading="Homepage" displayWhiteBackground={false} displayRecentPostsInSidebar={false}>
+      <SEO title="Home" />
+      <StaticQuery
+        query={indexQuery}
+        render={({ allMarkdownRemark: { edges, totalCount } }) => {
+          const numberOfPages = Math.ceil(totalCount / postsPerPage);
+          return (
+            <>
+              {edges.map(({ node }) => (
+                <Post
+                  key={node.id}
+                  date={node.frontmatter.date}
+                  title={node.frontmatter.title}
+                  slug={node.fields.slug}
+                  tags={node.frontmatter.tags}
+                  fluid={node.frontmatter.image?.childImageSharp?.fluid}
+                />
+              ))}
+              <Pagination currentPage={1} totalPages={numberOfPages} rootPath="/" />
+            </>
+          );
+        }}
+      />
+    </Layout>
+  );
+};
 
 export default IndexPage;
 
 const indexQuery = graphql`
   query {
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allMarkdownRemark(
+        sort: { fields: [frontmatter___date], order: DESC }
+        limit: 1
+    ) {
+      totalCount  
       edges {
         node {
           id
