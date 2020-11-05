@@ -9,13 +9,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import { useStaticQuery, graphql } from "gatsby";
 
-import "./layout.scss";
-
-import classes from "../../page-styles/index.module.scss";
-
 import Header from "../header";
-import Footer from "../footer";
 import Sidebar from "../sidebar";
+import Footer from "../footer";
+
+import "./layout.scss";
+import classes from "../../page-styles/index.module.scss";
 
 import constants from "../../constants";
 

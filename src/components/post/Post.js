@@ -4,6 +4,7 @@ import { Link } from "gatsby";
 import GatsbyImage from "gatsby-image";
 
 import classes from "./Post.module.scss";
+
 import constants from "../../constants";
 import { slugify } from "../../utils";
 

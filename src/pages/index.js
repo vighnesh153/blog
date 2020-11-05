@@ -3,8 +3,8 @@ import { graphql, StaticQuery } from "gatsby";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
-import Pagination from "../components/pagination";
 import Post from "../components/post";
+import Pagination from "../components/pagination";
 
 import constants from "../constants";
 

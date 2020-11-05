@@ -1,9 +1,9 @@
 import React from "react";
 import { graphql } from "gatsby";
 
+import Layout from "../components/layout";
 import SEO from "../components/seo";
 import Post from "../components/post";
-import Layout from "../components/layout";
 import Pagination from "../components/pagination";
 
 import { slugify } from "../utils";
