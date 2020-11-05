@@ -15,7 +15,8 @@ const constants = {
     }
   },
 
-  // If updated, also update the value of limit in graphql query in pages/index
+  // If updated, also update the value of limit in graphql query
+  // in pages/index and also in templates/tag-posts
   postsPerPage: 1,
 };
 

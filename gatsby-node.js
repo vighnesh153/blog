@@ -31,6 +31,7 @@ exports.createPages = ({ actions, graphql }) => {
     tagsPage: path.resolve("./src/templates/tags-page.js"),
     tagPosts: path.resolve("./src/templates/tag-posts.js"),
     postList: path.resolve("./src/templates/post-list.js"),
+    tagPostsPagination: path.resolve("./src/templates/tag-posts-pagination.js"),
   };
 
   return graphql(`
@@ -108,6 +109,7 @@ exports.createPages = ({ actions, graphql }) => {
     const postsPerPage = constants.postsPerPage;
     const numberOfPages = Math.ceil(posts.length / postsPerPage);
 
+    // Pagination for all posts
     for (let currentPage = 1; currentPage <= numberOfPages; currentPage++) {
       createPage({
         path: "/" + currentPage,
@@ -116,13 +118,29 @@ exports.createPages = ({ actions, graphql }) => {
           limit: postsPerPage,
           skip: (currentPage - 1) * postsPerPage,
           currentPage,
-          numberOfPages
+          numberOfPages,
         },
       });
     }
 
 
-
+    // Pagination for specific-tag posts
+    uniqueTags.forEach(tag => {
+      const numberOfPages = Math.ceil(tagsPostCount[tag] / postsPerPage);
+      for (let currentPage = 1; currentPage <= numberOfPages; currentPage++) {
+        createPage({
+          path: "/tags/" + slugify(tag) + "/" + currentPage,
+          component: templates.tagPostsPagination,
+          context: {
+            limit: postsPerPage,
+            skip: (currentPage - 1) * postsPerPage,
+            currentPage,
+            numberOfPages,
+            tag,
+          }
+        });
+      }
+    });
 
   });
 };
