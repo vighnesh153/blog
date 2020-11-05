@@ -15,25 +15,22 @@ const TagPosts = ({ data, pageContext }) => {
   const pageHeader = `${totalCount} post(s) tagged with "${tag}"`;
   const { postsPerPage } = constants;
 
+  const numberOfPages = Math.ceil(totalCount / postsPerPage)
+
   return (
     <Layout pageHeading={pageHeader} displayWhiteBackground={false} displayRecentPostsInSidebar={true}>
       <SEO title={tag} />
-      {data["allMarkdownRemark"].edges.map(({ node }) => {
-          const numberOfPages = Math.ceil(totalCount / postsPerPage)
-          return (
-            <>
-                <Post
-                  key={node.id}
-                  date={node.frontmatter.date}
-                  title={node.frontmatter.title}
-                  slug={node.fields.slug}
-                  tags={node.frontmatter.tags}
-                  fluid={node.frontmatter.image?.childImageSharp?.fluid}
-                />
-                <Pagination currentPage={1} totalPages={numberOfPages} rootPath={"/tags/" + slugify(tag) + "/"} />
-            </>
-          );
-      })}
+      {data["allMarkdownRemark"].edges.map(({ node }) => (
+        <Post
+          key={node.id}
+          date={node.frontmatter.date}
+          title={node.frontmatter.title}
+          slug={node.fields.slug}
+          tags={node.frontmatter.tags}
+          fluid={node.frontmatter.image?.childImageSharp?.fluid}
+        />
+      ))}
+      <Pagination currentPage={1} totalPages={numberOfPages} rootPath={"/tags/" + slugify(tag) + "/"} />
     </Layout>
   );
 };
