@@ -9,14 +9,18 @@ import Pagination from "../components/pagination";
 
 import { slugify } from "../utils";
 
-const TagPostsPagination = (props) => {
-  const posts = props.data['allMarkdownRemark'].edges;
+const TagPostsPagination = props => {
+  const posts = props.data["allMarkdownRemark"].edges;
   const { currentPage, numberOfPages, tag } = props.pageContext;
 
   const pageHeader = `Page: ${currentPage} of "${tag}"`;
 
   return (
-    <Layout pageHeading={pageHeader} displayWhiteBackground={false} displayRecentPostsInSidebar={true}>
+    <Layout
+      pageHeading={pageHeader}
+      displayWhiteBackground={false}
+      displayRecentPostsInSidebar={true}
+    >
       <SEO title={pageHeader} />
       {posts.map(({ node }) => (
         <Post
@@ -28,7 +32,11 @@ const TagPostsPagination = (props) => {
           fluid={node.frontmatter.image?.childImageSharp?.fluid}
         />
       ))}
-      <Pagination currentPage={currentPage} totalPages={numberOfPages} rootPath={"/tags/" + slugify(tag) + "/"} />
+      <Pagination
+        currentPage={currentPage}
+        totalPages={numberOfPages}
+        rootPath={"/tags/" + slugify(tag) + "/"}
+      />
     </Layout>
   );
 };
@@ -36,33 +44,33 @@ const TagPostsPagination = (props) => {
 export default TagPostsPagination;
 
 export const tagPostsPaginationQuery = graphql`
-    query($tag: String!, $skip: Int!, $limit: Int!) {
-        allMarkdownRemark (
-            sort: { fields: [frontmatter___date], order: DESC},
-            filter: { frontmatter: { tags: { in: [$tag] } } }
-            limit: $limit
-            skip: $skip
-        ) {
-            edges {
-                node {
-                    id
-                    frontmatter {
-                        title
-                        date(formatString: "MMM Do YYYY @ H:M")
-                        tags
-                        image {
-                            childImageSharp {
-                                fluid(maxWidth: 800) {
-                                    ...GatsbyImageSharpFluid
-                                }
-                            }
-                        }
-                    }
-                    fields {
-                        slug
-                    }
+  query($tag: String!, $skip: Int!, $limit: Int!) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+      limit: $limit
+      skip: $skip
+    ) {
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            date(formatString: "MMM Do YYYY @ H:M")
+            tags
+            image {
+              childImageSharp {
+                fluid(maxWidth: 800) {
+                  ...GatsbyImageSharpFluid
                 }
+              }
             }
+          }
+          fields {
+            slug
+          }
         }
+      }
     }
+  }
 `;

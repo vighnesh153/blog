@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import constants from "../../constants";
 
-import classes from './header.module.scss';
+import classes from "./header.module.scss";
 
 const HeaderLink = ({ to, text }) => (
   <Link

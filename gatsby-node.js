@@ -17,10 +17,9 @@ exports.onCreateNode = ({ node, actions }) => {
     createNodeField({
       node,
       name: "slug",
-      value: slugFromTitle
+      value: slugFromTitle,
     });
   }
-
 };
 
 exports.createPages = ({ actions, graphql }) => {
@@ -35,20 +34,20 @@ exports.createPages = ({ actions, graphql }) => {
   };
 
   return graphql(`
-      {
-          allMarkdownRemark {
-              edges {
-                  node {
-                      frontmatter {
-                          tags
-                      }
-                      fields {
-                          slug
-                      }
-                  }
-              }
+    {
+      allMarkdownRemark {
+        edges {
+          node {
+            frontmatter {
+              tags
+            }
+            fields {
+              slug
+            }
           }
+        }
       }
+    }
   `).then(result => {
     if (result.errors) {
       return Promise.reject(result.errors);
@@ -61,8 +60,8 @@ exports.createPages = ({ actions, graphql }) => {
         component: templates.singlePost,
         context: {
           // passing slug as template props
-          slug: node.fields.slug
-        }
+          slug: node.fields.slug,
+        },
       });
     });
 
@@ -123,7 +122,6 @@ exports.createPages = ({ actions, graphql }) => {
       });
     }
 
-
     // Pagination for specific-tag posts
     uniqueTags.forEach(tag => {
       const numberOfPages = Math.ceil(tagsPostCount[tag] / postsPerPage);
@@ -137,10 +135,9 @@ exports.createPages = ({ actions, graphql }) => {
             currentPage,
             numberOfPages,
             tag,
-          }
+          },
         });
       }
     });
-
   });
 };

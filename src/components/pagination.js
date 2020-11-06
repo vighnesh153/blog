@@ -8,7 +8,7 @@ const Pagination = ({ currentPage, totalPages, rootPath }) => {
   const showPreviousPage = previousPage > 0;
   const showNextPage = nextPage <= totalPages;
 
-  const goToPage = (pageNumber) => {
+  const goToPage = pageNumber => {
     if (pageNumber < 1 || pageNumber > totalPages) {
       alert("Itna gawaar samajh rakha hai kya be mereko?");
       return;
@@ -19,20 +19,32 @@ const Pagination = ({ currentPage, totalPages, rootPath }) => {
   return (
     <div style={styles.root}>
       <div style={styles.previousArrows}>
-        <div style={{...styles.halfHorizontalSpace}}>
-          <button style={styles.btn} disabled={!showPreviousPage} onClick={() => goToPage(1)}>
+        <div style={{ ...styles.halfHorizontalSpace }}>
+          <button
+            style={styles.btn}
+            disabled={!showPreviousPage}
+            onClick={() => goToPage(1)}
+          >
             {"<<<"}
           </button>
         </div>
-        <div style={{...styles.halfHorizontalSpace}}>
-          <button style={styles.btn} disabled={!showPreviousPage} onClick={() => goToPage(previousPage)}>
+        <div style={{ ...styles.halfHorizontalSpace }}>
+          <button
+            style={styles.btn}
+            disabled={!showPreviousPage}
+            onClick={() => goToPage(previousPage)}
+          >
             {"<"}
           </button>
         </div>
       </div>
       <div style={styles.numbers}>
         <div style={styles.flexGrowOne}>
-          <button style={styles.btn} disabled={!showPreviousPage} onClick={() => goToPage(previousPage)}>
+          <button
+            style={styles.btn}
+            disabled={!showPreviousPage}
+            onClick={() => goToPage(previousPage)}
+          >
             {showPreviousPage ? previousPage : "-"}
           </button>
         </div>
@@ -42,19 +54,31 @@ const Pagination = ({ currentPage, totalPages, rootPath }) => {
           </button>
         </div>
         <div style={styles.flexGrowOne}>
-          <button style={styles.btn} disabled={!showNextPage} onClick={() => goToPage(nextPage)}>
+          <button
+            style={styles.btn}
+            disabled={!showNextPage}
+            onClick={() => goToPage(nextPage)}
+          >
             {showNextPage ? nextPage : "-"}
           </button>
         </div>
       </div>
       <div style={styles.nextArrows}>
-        <div style={{...styles.halfHorizontalSpace}}>
-          <button style={styles.btn} disabled={!showNextPage} onClick={() => goToPage(nextPage)}>
+        <div style={{ ...styles.halfHorizontalSpace }}>
+          <button
+            style={styles.btn}
+            disabled={!showNextPage}
+            onClick={() => goToPage(nextPage)}
+          >
             {">"}
           </button>
         </div>
-        <div style={{...styles.halfHorizontalSpace}}>
-          <button style={styles.btn} disabled={!showNextPage} onClick={() => goToPage(totalPages)}>
+        <div style={{ ...styles.halfHorizontalSpace }}>
+          <button
+            style={styles.btn}
+            disabled={!showNextPage}
+            onClick={() => goToPage(totalPages)}
+          >
             {">>>"}
           </button>
         </div>
@@ -70,34 +94,34 @@ const styles = {
     width: "70%",
     height: "50px",
     margin: "0 auto",
-    display: 'flex',
+    display: "flex",
     backgroundColor: "white",
   },
   previousArrows: {
-    position: 'relative',
+    position: "relative",
     display: "flex",
-    flexGrow: '1',
+    flexGrow: "1",
   },
   numbers: {
-    position: 'relative',
+    position: "relative",
     display: "flex",
-    flexGrow: '3',
+    flexGrow: "3",
   },
   nextArrows: {
-    position: 'relative',
+    position: "relative",
     display: "flex",
-    flexGrow: '1',
+    flexGrow: "1",
   },
   halfHorizontalSpace: {
-    width: '50%',
-    height: '100%',
-    display: 'flex',
+    width: "50%",
+    height: "100%",
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },
   flexGrowOne: {
     flexGrow: "1",
-    display: 'flex',
+    display: "flex",
     alignItems: "center",
     justifyContent: "center",
   },

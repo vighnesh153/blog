@@ -18,15 +18,20 @@ import classes from "../../page-styles/index.module.scss";
 
 import constants from "../../constants";
 
-const Layout = ({ children, pageHeading, displayWhiteBackground, displayRecentPostsInSidebar }) => {
+const Layout = ({
+  children,
+  pageHeading,
+  displayWhiteBackground,
+  displayRecentPostsInSidebar,
+}) => {
   const data = useStaticQuery(graphql`
-      query SiteTitleQuery {
-          site {
-              siteMetadata {
-                  title
-              }
-          }
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
+        }
       }
+    }
   `);
 
   return (
@@ -38,12 +43,15 @@ const Layout = ({ children, pageHeading, displayWhiteBackground, displayRecentPo
           width: constants.bounds.rootContainer.width,
           maxWidth: constants.bounds.rootContainer.maxWidth,
           // padding: `0 1.0875rem 1.45rem`,
-          padding: `0 0 1.45rem`
+          padding: `0 0 1.45rem`,
         }}
       >
         <h1 style={styles.siteHeading}>{pageHeading}</h1>
         <div style={styles.root}>
-          <div style={styles.leftSideBar(displayWhiteBackground)} className={classes.leftMain}>
+          <div
+            style={styles.leftSideBar(displayWhiteBackground)}
+            className={classes.leftMain}
+          >
             <main>{children}</main>
           </div>
           <div style={styles.rightSideBar} className={classes.sidebar}>
@@ -57,7 +65,7 @@ const Layout = ({ children, pageHeading, displayWhiteBackground, displayRecentPo
 };
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 };
 
 export default Layout;
@@ -67,16 +75,16 @@ const styles = {
     position: "relative",
     display: "flex",
     alignItems: "flex-start",
-    justifyContent: "space-between"
+    justifyContent: "space-between",
   },
   siteHeading: {
     margin: "10px 0",
     padding: "10px",
     textAlign: "center",
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
-  leftSideBar: (displayWhiteBackground) => ({
-    backgroundColor: displayWhiteBackground ? "white" : "transparent"
+  leftSideBar: displayWhiteBackground => ({
+    backgroundColor: displayWhiteBackground ? "white" : "transparent",
   }),
-  rightSideBar: {}
+  rightSideBar: {},
 };

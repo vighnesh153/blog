@@ -13,7 +13,7 @@ function Post({ title, slug, date, fluid, tags }) {
   return (
     <div className={classes.post} style={styles.post}>
       <div className={classes.postImage}>
-        { fluid && <GatsbyImage fluid={fluid} /> }
+        {fluid && <GatsbyImage fluid={fluid} />}
       </div>
       <div className={classes.postBody}>
         <div className={classes.postHeader}>
@@ -32,10 +32,15 @@ function Post({ title, slug, date, fluid, tags }) {
         <ul className={classes.postTags}>
           {tags.map(tag => (
             <li key={tag}>
-              <Link to={`/tags/${slugify(tag)}`} style={{
-                color: constants.theme.primary,
-                backgroundColor: constants.theme.secondary,
-              }}>{tag}</Link>
+              <Link
+                to={`/tags/${slugify(tag)}`}
+                style={{
+                  color: constants.theme.primary,
+                  backgroundColor: constants.theme.secondary,
+                }}
+              >
+                {tag}
+              </Link>
             </li>
           ))}
         </ul>

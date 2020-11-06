@@ -1,4 +1,4 @@
-import React  from "react";
+import React from "react";
 import { graphql, StaticQuery } from "gatsby";
 
 import Layout from "../components/layout";
@@ -12,7 +12,11 @@ const IndexPage = () => {
   const { postsPerPage } = constants;
 
   return (
-    <Layout pageHeading="Homepage" displayWhiteBackground={false} displayRecentPostsInSidebar={false}>
+    <Layout
+      pageHeading="Homepage"
+      displayWhiteBackground={false}
+      displayRecentPostsInSidebar={false}
+    >
       <SEO title="Home" />
       <StaticQuery
         query={indexQuery}
@@ -30,7 +34,11 @@ const IndexPage = () => {
                   fluid={node.frontmatter.image?.childImageSharp?.fluid}
                 />
               ))}
-              <Pagination currentPage={1} totalPages={numberOfPages} rootPath="/" />
+              <Pagination
+                currentPage={1}
+                totalPages={numberOfPages}
+                rootPath="/"
+              />
             </>
           );
         }}
@@ -44,10 +52,10 @@ export default IndexPage;
 const indexQuery = graphql`
   query {
     allMarkdownRemark(
-        sort: { fields: [frontmatter___date], order: DESC }
-        limit: 1
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 1
     ) {
-      totalCount  
+      totalCount
       edges {
         node {
           id

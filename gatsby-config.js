@@ -48,12 +48,12 @@ module.exports = {
         gfm: true,
         // Plugins configs
         plugins: [
-          `gatsby-remark-mathjax`,            // Math support
-          `gatsby-remark-autolink-headers`,   // Links to headers (automatically)
-          `gatsby-remark-prismjs`,            // Colored code in code-block
-          `gatsby-remark-copy-linked-files`,  // Copies files to respective folders
-          `gatsby-remark-images`,             // blur-to-focus effect in images in markdown
-          `gatsby-remark-external-links`,     // adds target="_blank" and rel="..." to links
+          `gatsby-remark-mathjax`, // Math support
+          `gatsby-remark-autolink-headers`, // Links to headers (automatically)
+          `gatsby-remark-prismjs`, // Colored code in code-block
+          `gatsby-remark-copy-linked-files`, // Copies files to respective folders
+          `gatsby-remark-images`, // blur-to-focus effect in images in markdown
+          `gatsby-remark-external-links`, // adds target="_blank" and rel="..." to links
         ],
       },
     },
@@ -61,4 +61,4 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
   ],
-}
+};

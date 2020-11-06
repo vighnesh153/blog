@@ -1,18 +1,18 @@
 const constants = {
   theme: {
-    primary: '#6FF8DA',
-    secondary: '#0A192F',
-    info: '#2582cd',
+    primary: "#6FF8DA",
+    secondary: "#0A192F",
+    info: "#2582cd",
     post: {
-      bgColor: '#fff',
-      borderColor: '#ccc'
-    }
+      bgColor: "#fff",
+      borderColor: "#ccc",
+    },
   },
   bounds: {
     rootContainer: {
-      maxWidth: '960px',
-      width: '80%',
-    }
+      maxWidth: "960px",
+      width: "80%",
+    },
   },
 
   // If updated, also update the value of limit in graphql query

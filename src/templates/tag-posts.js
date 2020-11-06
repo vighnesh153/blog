@@ -15,10 +15,14 @@ const TagPosts = ({ data, pageContext }) => {
   const pageHeader = `${totalCount} post(s) tagged with "${tag}"`;
   const { postsPerPage } = constants;
 
-  const numberOfPages = Math.ceil(totalCount / postsPerPage)
+  const numberOfPages = Math.ceil(totalCount / postsPerPage);
 
   return (
-    <Layout pageHeading={pageHeader} displayWhiteBackground={false} displayRecentPostsInSidebar={true}>
+    <Layout
+      pageHeading={pageHeader}
+      displayWhiteBackground={false}
+      displayRecentPostsInSidebar={true}
+    >
       <SEO title={tag} />
       {data["allMarkdownRemark"].edges.map(({ node }) => (
         <Post
@@ -30,7 +34,11 @@ const TagPosts = ({ data, pageContext }) => {
           fluid={node.frontmatter.image?.childImageSharp?.fluid}
         />
       ))}
-      <Pagination currentPage={1} totalPages={numberOfPages} rootPath={"/tags/" + slugify(tag) + "/"} />
+      <Pagination
+        currentPage={1}
+        totalPages={numberOfPages}
+        rootPath={"/tags/" + slugify(tag) + "/"}
+      />
     </Layout>
   );
 };
@@ -38,33 +46,33 @@ const TagPosts = ({ data, pageContext }) => {
 export default TagPosts;
 
 export const tagQuery = graphql`
-    query($tag: String!) {
-        allMarkdownRemark (
-            sort: { fields: [frontmatter___date], order: DESC},
-            filter: { frontmatter: { tags: { in: [$tag] } } }
-            limit: 1
-        ) {
-            totalCount
-            edges {
-                node {
-                    id
-                    frontmatter {
-                        title
-                        date(formatString: "MMM Do YYYY @ H:M")
-                        tags
-                        image {
-                            childImageSharp {
-                                fluid(maxWidth: 800) {
-                                    ...GatsbyImageSharpFluid
-                                }
-                            }
-                        }
-                    }
-                    fields {
-                        slug
-                    }
+  query($tag: String!) {
+    allMarkdownRemark(
+      sort: { fields: [frontmatter___date], order: DESC }
+      filter: { frontmatter: { tags: { in: [$tag] } } }
+      limit: 1
+    ) {
+      totalCount
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            date(formatString: "MMM Do YYYY @ H:M")
+            tags
+            image {
+              childImageSharp {
+                fluid(maxWidth: 800) {
+                  ...GatsbyImageSharpFluid
                 }
+              }
             }
+          }
+          fields {
+            slug
+          }
         }
+      }
     }
+  }
 `;
