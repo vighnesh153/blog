@@ -1,12 +1,9 @@
 ---
 title: "Supported Markdown"
 date: 2020-10-26 13:00:01
-image: "../../images/000001.png"
+image: "./root-image.png"
 tags:
-  - Markdown 1
-  - Markdown 2
-  - Markdown 3
-  - Markdown 4
+  - Markdown
 ---
 
 Hi guys.
