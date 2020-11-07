@@ -50,7 +50,7 @@ export const tagQuery = graphql`
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
       filter: { frontmatter: { tags: { in: [$tag] } } }
-      limit: 1
+      limit: 5
     ) {
       totalCount
       edges {

@@ -46,12 +46,12 @@ const Layout = ({
           padding: `0 0 1.45rem`,
         }}
       >
-        <h1 style={styles.siteHeading}>{pageHeading}</h1>
         <div style={styles.root}>
           <div
             style={styles.leftSideBar(displayWhiteBackground)}
             className={classes.leftMain}
           >
+            <h1 style={styles.siteHeading}>{pageHeading}</h1>
             <main>{children}</main>
           </div>
           <div style={styles.rightSideBar} className={classes.sidebar}>
@@ -78,10 +78,11 @@ const styles = {
     justifyContent: "space-between",
   },
   siteHeading: {
-    margin: "10px 0",
+    margin: "0 0 10px",
     padding: "10px",
     textAlign: "center",
     backgroundColor: "white",
+    textDecoration: "underline",
   },
   leftSideBar: displayWhiteBackground => ({
     backgroundColor: displayWhiteBackground ? "white" : "transparent",

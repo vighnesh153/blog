@@ -10,14 +10,14 @@ const constants = {
   },
   bounds: {
     rootContainer: {
-      maxWidth: "960px",
+      maxWidth: "1200px",
       width: "80%",
     },
   },
 
   // If updated, also update the value of limit in graphql query
   // in pages/index and also in templates/tag-posts
-  postsPerPage: 1,
+  postsPerPage: 5,
 };
 
 module.exports = constants;

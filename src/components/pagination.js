@@ -13,7 +13,7 @@ const Pagination = ({ currentPage, totalPages, rootPath }) => {
       alert("Itna gawaar samajh rakha hai kya be mereko?");
       return;
     }
-    navigate(rootPath + pageNumber).then();
+    navigate(rootPath + pageNumber + "/").then();
   };
 
   return (

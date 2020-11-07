@@ -19,3 +19,65 @@ body {
   height: 100%;
   position: relative;
 }
+
+.markdown-customization {
+  h1, h2, h3, h4, h5, h6, blockquote, p {
+    margin-bottom: 10px;
+  }
+
+  blockquote {
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  h1, h2, h3, h4, h5, h6, blockquote {
+    margin-top: 20px;
+    border-bottom: 1px solid #aaa;
+    box-shadow: 0 4px 4px -4px #aaa;
+  }
+
+  h1 {
+    padding-bottom: 8px;
+  }
+
+  h2 {
+    padding-bottom: 7px;
+  }
+
+  h3 {
+    padding-bottom: 6px;
+  }
+
+  h4 {
+    padding-bottom: 5px;
+  }
+
+  h5 {
+    padding-bottom: 4px;
+  }
+
+  h6 {
+    padding-bottom: 3px;
+  }
+
+  blockquote {
+    padding: 10px;
+    border-left: 5px solid #a5a5a5;
+    background-color: #eee;
+  }
+
+  table {
+    width: 100%;
+    border-spacing: 0;
+
+    td, th {
+      padding: 5px 10px;
+      border: 1px solid #bbb;
+    }
+  }
+
+  li {
+    margin-left: 15px;
+  }
+}

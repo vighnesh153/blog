@@ -47,6 +47,7 @@ const SinglePost = ({ data }) => {
         <div style={styles.date}>{post.date}</div>
         <div
           style={styles.markdownContent}
+          className="markdown-customization"
           dangerouslySetInnerHTML={{ __html: html }}
         />
 
