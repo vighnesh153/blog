@@ -39,7 +39,7 @@ const SinglePost = ({ data }) => {
       displayWhiteBackground={true}
       displayRecentPostsInSidebar={true}
     >
-      <SEO title={post.title} />
+      <SEO title={post.title} description={html} />
       <div style={styles.root}>
         <div style={styles.imageContainer}>
           <GatsbyImage fluid={post.image.childImageSharp.fluid} />
