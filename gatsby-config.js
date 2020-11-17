@@ -3,8 +3,39 @@ module.exports = {
     title: `Vighnesh Raut's Blog`,
     description: `Hello everyone. I am Vighnesh Raut. Welcome to my personal blog. I hope you like my content.`,
     author: `Vighnesh Raut`,
+    siteUrl: `https://blog.vighnesh153.com`,
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        output: `/sitemap.xml`,
+        query: `
+                {
+                site {
+                    siteMetadata {
+                        siteUrl
+                    }
+                }
+
+                allSitePage {
+                    edges {
+                        node {
+                            path
+                        }
+                    }
+                }
+            }`,
+        serialize: ({ site, allSitePage }) =>
+          allSitePage.edges.map(edge => {
+            return {
+              url: site.siteMetadata.siteUrl + edge.node.path,
+              changefreq: `weekly`,
+              priority: 0.7,
+            }
+          }),
+      }
+    },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
     {
