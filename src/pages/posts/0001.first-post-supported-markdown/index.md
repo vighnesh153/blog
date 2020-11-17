@@ -2,6 +2,7 @@
 title: "Supported Markdown"
 date: 2020-10-26 13:00:01
 image: "./root-image.png"
+description: "In this post, I test different Markdown syntax that can be used on my site. It also supports Math formulas with the help of Katex."
 tags:
   - Markdown
 ---
