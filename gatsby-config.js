@@ -32,9 +32,9 @@ module.exports = {
               url: site.siteMetadata.siteUrl + edge.node.path,
               changefreq: `weekly`,
               priority: 0.7,
-            }
+            };
           }),
-      }
+      },
     },
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
@@ -83,9 +83,9 @@ module.exports = {
             resolve: `gatsby-remark-katex`,
             options: {
               // Add any KaTeX options from https://github.com/KaTeX/KaTeX/blob/master/docs/options.md here
-              strict: `ignore`
-            }
-          },  // Math support
+              strict: `ignore`,
+            },
+          }, // Math support
           `gatsby-remark-autolink-headers`, // Links to headers (automatically)
           {
             resolve: `gatsby-remark-prismjs`,
@@ -151,7 +151,7 @@ module.exports = {
               // of HTML entities and their escape value IE: { '}': '&#123;' }
               escapeEntities: {},
             },
-          },  // Colored code in code-block
+          }, // Colored code in code-block
           `gatsby-remark-copy-linked-files`, // Copies files to respective folders
           `gatsby-remark-images`, // blur-to-focus effect in images in markdown
           `gatsby-remark-external-links`, // adds target="_blank" and rel="..." to links
