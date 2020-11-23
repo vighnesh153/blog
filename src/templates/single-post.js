@@ -135,12 +135,12 @@ const styles = {
     margin: "0 0 20px",
   },
   date: {
-    margin: "0 0 20px",
+    margin: "0 0 40px",
     color: constants.theme.info,
     textAlign: "left",
   },
   markdownContent: {
-    marginBottom: "20px",
+    marginBottom: "100px",
     lineHeight: "20px",
   },
   socialLinks: {
