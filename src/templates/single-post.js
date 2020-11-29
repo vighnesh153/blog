@@ -111,7 +111,7 @@ export const postQuery = graphql`
         tags
         image {
           childImageSharp {
-            fluid(maxWidth: 700) {
+            fluid {
               ...GatsbyImageSharpFluid
             }
           }
@@ -133,14 +133,15 @@ const styles = {
   },
   imageContainer: {
     margin: "0 0 20px",
+    overflow: "visible",
   },
   date: {
-    margin: "0 0 20px",
+    margin: "0 0 40px",
     color: constants.theme.info,
     textAlign: "left",
   },
   markdownContent: {
-    marginBottom: "20px",
+    marginBottom: "100px",
     lineHeight: "20px",
   },
   socialLinks: {
