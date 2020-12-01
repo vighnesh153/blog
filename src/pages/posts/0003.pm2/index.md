@@ -85,7 +85,7 @@ to respond to all the users, instantaneously. We need more instances to
 handle these many users. The most obvious solution would be to run our 
 application on different ports.
 
-```shell script
+```shell
 $ node app.js --port=3001
 $ node app.js --port=3002
 $ node app.js --port=3003
@@ -188,7 +188,7 @@ But that is a lot of manual work. There exists a module called `pm2`
 which does all of this for us. 
 
 Install this globally on the server:
-```shell script
+```shell
 $ npm i -g pm2
 ``` 
 
@@ -209,7 +209,7 @@ app.listen(PORT, () => {
 ```
 
 To start this, run
-```shell script
+```shell
 $ pm2 start app.js -i 0
 # -i -> Number of instances and if 0, 
 # then defaults to no. of logical cores.
@@ -219,7 +219,7 @@ $ pm2 start app.js -i 0
 <br>
 
 To list all running instances, 
-```shell script
+```shell
 $ pm2 list
 ```
 ![](./pm2-list.png)
@@ -227,7 +227,7 @@ $ pm2 list
 <br>
 
 To monitor, 
-```shell script
+```shell
 $ pm2 monit
 ```
 ![](./pm2-monit.png)
@@ -235,7 +235,7 @@ $ pm2 monit
 <br>
 
 To stop running instances, 
-```shell script
+```shell
 $ pm2 delete index
 # index is the name of the instance. 
 ```
@@ -248,7 +248,7 @@ What if the server crashes? We can configure the server to restart on
 crash but then our pm2 instances will be stopped. To make the pm2 
 auto-start on server restart, we run:
 
-```shell script
+```shell
 $ pm2 startup
 # Make pm2 auto-boot at server restart
 ``` 

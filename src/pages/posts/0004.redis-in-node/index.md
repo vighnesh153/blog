@@ -28,14 +28,14 @@ caching. In this post, we will see, how we can use **Redis** in a
 Installing redis is not the same for all platforms. So, we are going to 
 use docker to run redis on our machine.
 
-```shell script
+```shell
 $ docker run -d -p 6379:6379 --name some-redis redis
 ```
 
 This will start up the **Redis** server on port $6379$.
 
 ### Installing Redis package to interact with the Redis server
-```shell script
+```shell
 $ npm install redis
 ```
 
