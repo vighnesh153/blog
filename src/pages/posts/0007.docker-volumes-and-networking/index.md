@@ -58,63 +58,6 @@ $ docker volume inspect <VOLUME-HASH>
 $ docker volume inspect <VOLUME-NAME>
 ```
 
-### Ignore files when copying
-Create a `.dockerignore` file. It is similar to the
-`.gitignore` file. When we run `COPY . .` in our
-Dockerfile, docker won't copy files mentioned in the
-`.dockerignore` file.
-
-Sample .dockerignore
-```gitignore
-node_modules/
-
-Dockerfile
-
-.git/
-
-.env
-```
-
-### Environment variables
-Using environment variables
-```dockerfile
-EXPOSE $PORT
-```
-
-#### Setting Environment variables In a Dockerfile
-```dockerfile
-ENV PORT 80
-```
-#### Setting Environment variables In CLI
-```shell
-$ docker run -d -p 3000:4242 -e PORT=4242 some-image
-```
-#### Read Environment Variables from a .env file
-```shell
-$ docker run -d -p 3000:4242 --env-file ./.env some-image
-```
-
-### Arguments
-Arguments are build time arguments that can be used
-inside the Dockerfile.
-
-```dockerfile
-
-ARG DEFAULT_PORT=4224
-
-ENV PORT $DEFAULT_PORT
-
-```
-
-Usage:
-```shell
-$ docker build --build-arg DEFAULT_PORT=9999 .
-# port will be 9999
-
-$ docker build .
-# port will be 4224
-```
-
 
 ## Networking
 

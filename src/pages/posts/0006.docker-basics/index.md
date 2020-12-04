@@ -154,6 +154,15 @@ COPY package-lock.json /app
 RUN npm install
 
 
+# When executing a command in the running 
+# container with the help of `docker exec`,
+# we can skip the prefix of the commands. 
+# For eg. `npm init` becomes `init` and 
+# `npm install express` becomes `install express`.
+# Check the [Exec](#exec) section to learn more.
+ENTRYPOINT [ "npm" ]
+
+
 # Copy all the project files to the working 
 # directory in our image.
 COPY . /app
@@ -192,6 +201,9 @@ CMD [ "node", "app.js" ]
 |[Remove all containers](#remove-all-containers)|
 |[Push image to a registry](#push-image-to-a-registry)|
 |[Pull image from a registry](#pull-an-image-from-the-registry)|
+|[Environment Variables](#environment-variables)|
+|[Build Args](#build-arguments)|
+|[Exec](#exec)|
 
 
 #### Build an image
@@ -323,6 +335,81 @@ $ docker pull IMAGE
 # this is done automatically if you just 
 # `docker run IMAGE` and the image wasn't 
 # pulled before.
+```
+
+### Ignore files when copying
+Create a `.dockerignore` file. It is similar to the
+`.gitignore` file. When we run `COPY . .` in our
+Dockerfile, docker won't copy files mentioned in the
+`.dockerignore` file.
+
+Sample .dockerignore
+```gitignore
+node_modules/
+
+Dockerfile
+
+.git/
+
+.env
+```
+
+### Environment variables
+Using environment variables
+```dockerfile
+EXPOSE $PORT
+```
+
+#### Setting Environment variables In a Dockerfile
+```dockerfile
+ENV PORT 80
+```
+#### Setting Environment variables In CLI
+```shell
+$ docker run -d -p 3000:4242 -e PORT=4242 some-image
+```
+#### Read Environment Variables from a .env file
+```shell
+$ docker run -d -p 3000:4242 --env-file ./.env some-image
+```
+
+### Build Arguments
+Arguments are build time arguments that can be used
+inside the Dockerfile.
+
+```dockerfile
+
+ARG DEFAULT_PORT=4224
+
+ENV PORT $DEFAULT_PORT
+
+```
+
+Usage:
+```shell
+$ docker build --build-arg DEFAULT_PORT=9999 .
+# port will be 9999
+
+$ docker build .
+# port will be 4224
+```
+
+
+### Exec
+We can use this command to run any command inside any 
+**running container**. 
+```shell
+$ docker exec -it <container-name> <command>
+
+# eg
+$ docker exec -it my_running_node npm init
+
+# If `ENTRYPOINT` was set in Dockerfile
+# ENTRYPOINT ["npm"], then we can omit the 
+# initial command
+$ docker exec -it my_running_node init                # runs `npm init`
+$ docker exec -it my_running_node install express     # runs `npm install express`
+
 ```
 
 
