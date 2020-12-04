@@ -14,6 +14,7 @@ import Sidebar from "../sidebar";
 import Footer from "../footer";
 
 import "./layout.scss";
+import "github-markdown-css/github-markdown.css";
 import classes from "../../page-styles/index.module.scss";
 
 import constants from "../../constants";
